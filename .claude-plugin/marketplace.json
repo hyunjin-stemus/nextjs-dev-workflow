@@ -1,0 +1,15 @@
+{
+  "name": "nextjs-dev-workflow",
+  "owner": {
+    "name": "hyunjin-stemus"
+  },
+  "plugins": [
+    {
+      "name": "nextjs-dev-workflow",
+      "source": "./",
+      "description": "Next.js App Router frontend development workflow: cycle commands (prd-from-requirement, task-start, task-implement, task-ship, cycle-finish) powered by Task Master AI",
+      "category": "development",
+      "tags": ["nextjs", "react", "typescript", "frontend", "workflow", "taskmaster"]
+    }
+  ]
+}

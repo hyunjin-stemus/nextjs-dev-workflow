@@ -1,0 +1,9 @@
+{
+  "name": "nextjs-dev-workflow",
+  "version": "1.0.0",
+  "description": "Next.js App Router frontend development workflow: cycle commands (prd-from-requirement, task-start, task-implement, task-ship, cycle-finish) powered by Task Master AI",
+  "author": {
+    "name": "hyunjin-stemus"
+  },
+  "keywords": ["nextjs", "react", "typescript", "frontend", "workflow", "taskmaster"]
+}
