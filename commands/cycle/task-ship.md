@@ -47,10 +47,11 @@ description: "task 배포 — 커밋 → PR 생성 → nextjs-react-reviewer 리
    git push -u origin feature/<task-id>-<slug>
    ```
 
-4. **PR 생성** — 1단계에서 통과한 항목은 `[x]`로 체크한다:
+4. **PR 생성** — base 브랜치를 `develop`으로 지정하고, 1단계에서 통과한 항목은 `[x]`로 체크한다:
 
    ```bash
    gh pr create \
+     --base develop \
      --title "<task 제목>" \
      --body "$(cat <<'EOF'
    ## Summary
@@ -72,7 +73,26 @@ description: "task 배포 — 커밋 → PR 생성 → nextjs-react-reviewer 리
 
 5. **PR 리뷰** — `nextjs-react-reviewer` 서브에이전트를 호출한다.
    - PR URL 또는 PR 번호를 에이전트에 전달한다.
-   - 리뷰 결과를 사용자에게 요약해서 보여준다.
+   - 리뷰 완료 후 아래 형식으로 **모든 리뷰 항목을 빠짐없이 정리**해서 사용자에게 보여준다:
+
+     **[PR 코드 리뷰 결과 전체 목록]**
+
+     | # | 파일 | 심각도 | 내용 | 반영 시 고려사항 |
+     |---|------|--------|------|-----------------|
+     | 1 | path/to/file.tsx | 🔴 critical | 지적 내용 | 반영 시 발생 가능한 문제점, side effect, SSR/CSR 영향, 추가 커밋 필요 여부 등 상세 기술 |
+     | 2 | ... | 🟡 warning | ... | ... |
+
+     심각도 기준: 🔴 critical (버그/보안/타입오류) / 🟡 warning (컨벤션/성능) / 🔵 suggestion (개선 제안)
+
+   - 각 항목에 대해 **반영 시 발생 가능한 문제점과 고려사항**을 구체적으로 기술한다:
+     - 다른 컴포넌트/파일로의 연쇄 영향
+     - SSR/CSR 동작 변경 가능성
+     - React Query 캐시, hydration 관련 주의사항
+     - 병합 전 반드시 반영해야 하는 항목 여부
+
+   - **컨펌 대기**: 위 목록을 보여준 후 반드시 사용자에게 "어떤 항목을 반영할까요?" 확인을 받는다.
+     컨펌 없이 코드를 수정하지 않는다.
+
    - 리뷰 결과를 PR 댓글로 게시한다:
 
      ```bash
@@ -84,7 +104,7 @@ description: "task 배포 — 커밋 → PR 생성 → nextjs-react-reviewer 리
      )"
      ```
 
-6. **PR 피드백 반영** — 리뷰 지적 사항을 수정한 후 추가 커밋을 생성하고 푸시한다.
+6. **PR 피드백 반영** — 컨펌된 항목만 수정한 후 추가 커밋을 생성하고 푸시한다. 컨펌되지 않은 항목은 건드리지 않는다.
 
 7. **병합 컨펌 대기** — 사용자에게 병합 여부를 확인한다. **사용자 명시적 컨펌 없이 병합하지 않는다.**
 
@@ -94,11 +114,11 @@ description: "task 배포 — 커밋 → PR 생성 → nextjs-react-reviewer 리
    gh pr merge <PR번호> --squash
    ```
 
-9. **로컬 main 브랜치 동기화**:
+9. **로컬 develop 브랜치 동기화**:
 
    ```bash
-   git checkout main
-   git pull origin main
+   git checkout develop
+   git pull origin develop
    ```
 
 10. **task done 처리**:
