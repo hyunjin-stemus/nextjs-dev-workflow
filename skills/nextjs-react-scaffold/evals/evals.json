@@ -1,0 +1,23 @@
+{
+  "skill_name": "nextjs-react-scaffold",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "새로운 Next.js + React 프로젝트 셋업해줘. 모듈화랑 공통 예외처리 구조를 잘 잡아서 나중에 팀원이 API 추가할 때 패턴이 명확하도록 해줘. /tmp/eval-nextjs-0 폴더에 만들어줘.",
+      "expected_output": "@/* 경로 alias, lib/api/client.ts (fetch wrapper + ApiError), lib/query/query-client.ts + query-keys.ts, hooks/ 패턴, components/ui|common|layout 분류, lib/api/error-messages.ts + hooks/useErrorModal.ts + components/common/ErrorModal.tsx, lib/stores/, app/providers.tsx 모두 존재. tsc --noEmit 통과.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "빈 폴더에 nextjs 앱 기본 구조 잡아줘. api 레이어랑 컴포넌트가 분리되고, 에러 처리가 공통화된 구조로. 상태관리는 zustand 쓰고 싶어. /tmp/eval-nextjs-1에 만들어줘.",
+      "expected_output": "lib/api/, lib/query/, lib/stores/ zustand 슬라이스, components/ui|common|layout 분류, 3계층 데이터 흐름 구조, 공통 예외처리 파일들 모두 존재.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "react/nextjs 새 프로젝트 시작하는데 디렉토리 구조랑 컨벤션 좀 깔아줘. 나중에 기능 추가할 때 어디 파일 만들면 되는지 명확하면 좋겠고, fetch wrapper 같은 공통 인프라도 미리 세팅해줘. /tmp/eval-nextjs-2 경로에 생성해줘.",
+      "expected_output": "create-next-app 또는 수동으로 Next.js 구조 생성, lib/api/types.ts (ApiResponse<T>), lib/api/client.ts (apiFetch, ApiError), TanStack Query 셋업, 컴포넌트 분류 구조, 명확한 컨벤션 문서나 주석.",
+      "files": []
+    }
+  ]
+}
