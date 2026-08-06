@@ -24,3 +24,11 @@ REQUIREMENT.md 기반 Task Master AI 워크플로우를 슬래시 커맨드로 �
 ```bash
 /plugin install github:hyunjin-stemus/nextjs-dev-workflow
 ```
+
+설치 직후 `agents/`, `commands/` 등은 현재 세션에 바로 반영되지 않는다. 아래 중 하나를 반드시 실행한다:
+
+```bash
+/reload-plugins
+```
+
+또는 Claude Code를 완전히 재시작한다. 실행하지 않으면 슬래시 커맨드에 `nextjs-dev-workflow:` 네임스페이스가 붙지 않는다.
